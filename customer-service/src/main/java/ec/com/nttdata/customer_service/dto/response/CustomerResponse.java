@@ -12,7 +12,7 @@ public class CustomerResponse {
     private String dni;
     private String address;
     private String phone;
-    private boolean isActive;
+    private Boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

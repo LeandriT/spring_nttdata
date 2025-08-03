@@ -17,26 +17,33 @@ Este microservicio gestiona los datos de clientes (customers) dentro de un siste
 ## Endpoints
 
 ### `GET /customers`
+
 Lista paginada de clientes.
 
 ### `GET /customers/{id}`
+
 Obtiene la información de un cliente por ID.
 
 ### `POST /customers`
+
 Crea un nuevo cliente.
 
 ### `PUT /customers/{id}`
+
 Actualiza la información de un cliente.
 
 ### `DELETE /customers/{id}`
+
 Elimina un cliente.
 
 ### `POST /customers/by-ids`
+
 Recupera una lista de clientes según los IDs proporcionados.
 
 ## Estructura de DTOs
 
 ### `CustomerRequest`
+
 ```json
 {
   "name": "Juan Pérez",
@@ -51,6 +58,7 @@ Recupera una lista de clientes según los IDs proporcionados.
 ```
 
 ### `CustomerResponse`
+
 ```json
 {
   "id": 1,
@@ -68,7 +76,8 @@ Recupera una lista de clientes según los IDs proporcionados.
 
 ## Base de datos
 
-Los scripts `schema.sql` y `data.sql` están configurados en `application.yml` para inicializar la base de datos H2 en memoria.
+Los scripts `schema.sql` y `data.sql` están configurados en `application.yml` para inicializar la base de datos H2 en
+memoria.
 
 La consola H2 está disponible en: `http://localhost:8080/h2-console`
 
@@ -78,7 +87,8 @@ La consola H2 está disponible en: `http://localhost:8080/h2-console`
 
 ## Cobertura de pruebas
 
-Jacoco está configurado para verificar una cobertura mínima del 85% en líneas de código de clases clave, excluyendo DTOs, modelos, configuraciones y excepciones.
+Jacoco está configurado para verificar una cobertura mínima del 85% en líneas de código de clases clave, excluyendo
+DTOs, modelos, configuraciones y excepciones.
 
 ---
 

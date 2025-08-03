@@ -2,6 +2,7 @@ package ec.com.nttdata.customer_service.controller;
 
 import ec.com.nttdata.customer_service.dto.request.CustomerRequest;
 import ec.com.nttdata.customer_service.dto.response.CustomerResponse;
+import ec.com.nttdata.customer_service.dto.retentions.OnCreate;
 import ec.com.nttdata.customer_service.service.CustomerService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,10 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/customers")
 @RequiredArgsConstructor
+@Validated
 public class CustomerController {
 
     private final CustomerService service;
-
 
     @GetMapping
     public ResponseEntity<Page<CustomerResponse>> index(Pageable pageable) {
@@ -37,7 +39,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerResponse> create(@RequestBody CustomerRequest request) {
+    public ResponseEntity<CustomerResponse> create(@Validated(OnCreate.class) @RequestBody CustomerRequest request) {
         return new ResponseEntity<>(service.create(request), HttpStatus.CREATED);
     }
 
@@ -52,6 +54,7 @@ public class CustomerController {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
     @PostMapping("/by-ids")
     public ResponseEntity<List<CustomerResponse>> getCustomersByIds(@RequestBody List<Long> customerIds) {
         List<CustomerResponse> customers = service.findByIds(customerIds);

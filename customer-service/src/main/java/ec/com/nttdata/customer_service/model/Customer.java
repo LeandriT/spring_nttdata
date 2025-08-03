@@ -16,5 +16,5 @@ import lombok.NoArgsConstructor;
 public class Customer extends Person {
     private String customerId;
     private String password;
-    private boolean isActive;
+    private Boolean isActive;
 }
