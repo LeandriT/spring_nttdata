@@ -7,19 +7,15 @@
 # Gradle
 .gradle/
 build/
-
-account-service/.gradle/
-account-service/build/
-account-service/.idea/
-
-customer-service/.gradle/
-customer-service/build/
-customer-service/.idea/
+!gradle/wrapper/gradle-wrapper.jar
 
 # IntelliJ IDEA
 .idea/
 *.iml
 *.iws
+
+# VSCode
+.vscode/
 
 # Logs
 *.log
@@ -28,7 +24,7 @@ customer-service/.idea/
 .DS_Store
 Thumbs.db
 
-# Other
-*.tmp
+# Editor
 *.swp
 *.swo
+*.tmp

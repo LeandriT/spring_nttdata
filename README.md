@@ -23,32 +23,32 @@ para los datos de los clientes, permitiendo almacenar y mantener actualizada la 
 
 ### Descripción
 
-El `Account Service` es un microservicio encargado de gestionar las cuentas bancarias y las transacciones financieras asociadas a dichas cuentas.
-Proporciona operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para cuentas y transacciones, así como la generación de reportes de estado de cuenta.
+El `Account Service` es un microservicio encargado de gestionar las cuentas bancarias y los movimientos financieras asociadas a dichas cuentas.
+Proporciona operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para cuentas y movimientos, así como la generación de reportes de estado de cuenta.
 
 ### Funcionalidades Clave
 
 - **Gestión de Cuentas:** Permite crear, consultar, actualizar y eliminar cuentas bancarias.
-- **Gestión de Transacciones:** Facilita la creación, consulta, actualización y eliminación de transacciones financieras.
-- **Reportes de Estado de Cuenta:** Genera reportes detallados de las transacciones y balances de una cuenta en un rango de fechas.
+- **Gestión de Movimientos:** Facilita la creación, consulta, actualización y eliminación de movimientos financieras.
+- **Reportes de Estado de Cuenta:** Genera reportes detallados de los movimientos y balances de una cuenta en un rango de fechas.
 
 ### Endpoints Principales
 
 - `/accounts`: Gestión de cuentas.
-- `/transactions`: Gestión de transacciones.
-- `/accounts/reports`: Generación de reportes de estado de cuenta.
+- `/movements`: Gestión de movimientos.
+- `/reports`: Generación de reportes de estado de cuenta.
 
 ## Integración y Uso
 
 Ambos microservicios están diseñados para funcionar de manera independiente, pero pueden integrarse dentro de una arquitectura más amplia para ofrecer
 un sistema bancario completo. El `Account Service` y el `Customer Service` interactúan mediante identificadores de clientes, lo que permite vincular
-cuentas y transacciones a los datos de los clientes.
+cuentas y movimientos a los datos de los clientes.
 
 ## Requisitos Previos
 
 - **Java:** Ambos microservicios están desarrollados en Java, por lo que se requiere un entorno de ejecución de Java.
 - **Spring Boot:** Utilizan Spring Boot como framework principal.
-- **Base de Datos:** Se requiere una base de datos compatible con JPA/Hibernate para persistir los datos de cuentas, transacciones y clientes.
+- **Base de Datos:** Se requiere una base de datos compatible con JPA/Hibernate para persistir los datos de cuentas, movimientos y clientes.
 
 ## Ejecución
 
