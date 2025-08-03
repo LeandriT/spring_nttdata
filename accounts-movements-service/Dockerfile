@@ -1,5 +1,6 @@
+# Dockerfile (ejemplo común para ambos servicios)
 FROM openjdk:17-jdk-alpine
 WORKDIR /app
 COPY build/libs/*.jar app.jar
-EXPOSE 8081
+EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]

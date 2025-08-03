@@ -89,7 +89,9 @@ La consola H2 está disponible en: `http://localhost:8080/h2-console`
 
 Jacoco está configurado para verificar una cobertura mínima del 85% en líneas de código de clases clave, excluyendo
 DTOs, modelos, configuraciones y excepciones.
-
+## Docker Compose
+Para correr kafka localmente ejecutar comando:
+- docker-compose up -d
 ---
 
 Desarrollado por **Gandhy**
