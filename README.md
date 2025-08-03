@@ -55,7 +55,9 @@ cuentas y transacciones a los datos de los clientes.
 Para ejecutar cada microservicio, siga los siguientes pasos:
 Tener docker - docker compose instalador y ejecutar el comando
 
-docker compose up --build
+- **chmod a+x build-and-run.sh** (permiso para ejecutar archivo)
+- **./build-and-run.sh o sh build-and-run.sh** (build de jar files y run de docker compose)
+
 
 1. **Clonar el repositorio:**
    ```bash

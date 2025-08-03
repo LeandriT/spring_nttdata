@@ -24,7 +24,4 @@ public interface AccountService {
 
     void updateAccountBalance(AccountBalanceDto accountBalanceDto);
 
-    Page<AccountStatementReport> accountStatementReport(
-            Pageable pageable, Long customerId, LocalDate startDate, LocalDate endDate
-    );
 }

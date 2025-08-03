@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d69415f3-1912-4b88-b785-5aca8d33c3f0" name="Changes" comment="fix: git ignore">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/build-and-run.sh" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
@@ -71,6 +70,15 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -96,14 +104,17 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.AccountServiceImplTest.executor": "Run",
     "Gradle.CustomerControllerTest.executor": "Run",
+    "Gradle.ReportServiceImplTest.executor": "Run",
     "Gradle.accounts-movements-service [:ec.com.nttdata.accounts_movements_service.AccountsMovementsServiceApplication.main()].executor": "Debug",
     "Gradle.customer-service [:ec.com.nttdata.customer_service.CustomerServiceApplication.main()].executor": "Debug",
     "Gradle.customer-service [test].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "main",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "last_opened_file_path": "/Users/gandhycuasapas/Documents/EJECICIOS EMPRESAS/spring_nttdata",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
@@ -111,7 +122,19 @@
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.CustomerServiceApplication">
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="ec.com.nttdata.accounts_movements_service.service.impl" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="ec.com.nttdata.accounts_movements_service.controller" />
+      <recent name="ec.com.nttdata.accounts_movements_service.service.impl" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.AccountServiceImplTest">
     <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
       <option name="appName" />
       <option name="appServicePlanName" />
@@ -168,10 +191,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CustomerControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="AccountServiceImplTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/customer-service" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/accounts-movements-service" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
@@ -181,7 +204,31 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;ec.com.nttdata.customer_service.controller.CustomerControllerTest&quot;" />
+            <option value="&quot;ec.com.nttdata.accounts_movements_service.service.impl.AccountServiceImplTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="ReportServiceImplTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/accounts-movements-service" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ec.com.nttdata.accounts_movements_service.service.impl.ReportServiceImplTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -216,10 +263,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.AccountServiceImplTest" />
+        <item itemvalue="Gradle.ReportServiceImplTest" />
         <item itemvalue="Application.CustomerServiceApplication" />
         <item itemvalue="Application.AccountsMovementsServiceApplication" />
         <item itemvalue="Gradle.customer-service [test]" />
-        <item itemvalue="Gradle.CustomerControllerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -254,16 +302,6 @@
           <url>file://$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/service/impl/MovementServiceImpl.java</url>
           <line>52</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/service/impl/AccountServiceImpl.java</url>
-          <line>183</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/service/impl/AccountServiceImpl.java</url>
-          <line>245</line>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

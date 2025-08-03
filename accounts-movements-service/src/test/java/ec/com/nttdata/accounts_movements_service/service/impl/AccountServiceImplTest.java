@@ -3,7 +3,6 @@ package ec.com.nttdata.accounts_movements_service.service.impl;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -12,7 +11,6 @@ import ec.com.nttdata.accounts_movements_service.client.CustomerClient;
 import ec.com.nttdata.accounts_movements_service.client.dto.CustomerDto;
 import ec.com.nttdata.accounts_movements_service.dto.account.request.AccountRequest;
 import ec.com.nttdata.accounts_movements_service.dto.account.response.AccountResponse;
-import ec.com.nttdata.accounts_movements_service.dto.report.AccountStatementReport;
 import ec.com.nttdata.accounts_movements_service.enums.AccountTypeEnum;
 import ec.com.nttdata.accounts_movements_service.event_handler.dto.AccountBalanceDto;
 import ec.com.nttdata.accounts_movements_service.exception.AccountNotFoundException;
@@ -20,15 +18,10 @@ import ec.com.nttdata.accounts_movements_service.exception.CustomerNotFoundExcep
 import ec.com.nttdata.accounts_movements_service.mapper.AccountMapper;
 import ec.com.nttdata.accounts_movements_service.model.Account;
 import ec.com.nttdata.accounts_movements_service.repository.AccountRepository;
-import feign.FeignException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -200,70 +193,5 @@ class AccountServiceImplTest {
         }).isInstanceOf(CustomerNotFoundException.class);
     }
 
-    @Test
-    void fetchCustomer_ShouldThrow_WhenCustomerNotFound() throws Exception {
-        when(customerClient.show(99L)).thenThrow(FeignException.NotFound.class);
 
-        assertThatThrownBy(() -> invokePrivateMethod("fetchCustomer",
-                new Class[] {Long.class}, 99L))
-                .isInstanceOf(InvocationTargetException.class)
-                .hasCauseInstanceOf(CustomerNotFoundException.class);
-    }
-
-    @Test
-    void validateDateRange_ShouldThrow_WhenStartAfterEnd() throws Exception {
-        LocalDate start = LocalDate.now();
-        LocalDate end = start.minusDays(1);
-
-        assertThatThrownBy(() -> invokePrivateMethod("validateDateRange",
-                new Class[] {LocalDate.class, LocalDate.class}, start, end))
-                .isInstanceOf(InvocationTargetException.class)
-                .hasCauseInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    void validateDateRange_ShouldAllowOldDates() throws Exception {
-        LocalDate start = LocalDate.of(2024, 8, 2);
-        LocalDate end = LocalDate.of(2025, 8, 2);
-
-        invokePrivateMethod("validateDateRange", new Class[] {LocalDate.class, LocalDate.class}, start, end);
-    }
-
-    @Test
-    void accountStatementReport_ShouldReturnEmptyPage_WhenNoCustomerIdsExtractedFromAccounts() {
-        Pageable pageable = PageRequest.of(0, 5);
-        LocalDate start = LocalDate.now().minusDays(5);
-        LocalDate end = LocalDate.now();
-
-        Account acc = buildSampleAccount();
-        acc.setCustomerId(99L);
-        acc.setMovements(Set.of());
-
-        Page<Account> page = new PageImpl<>(List.of(acc));
-
-        when(repository.findByCustomerIdAndStartDateAndEndDate(
-                pageable, null, start.atStartOfDay(), end.atTime(LocalTime.MAX)))
-                .thenReturn(page);
-
-        when(customerClient.showByIds(Set.of(99L))).thenReturn(Set.of());
-
-        Page<AccountStatementReport> result = service.accountStatementReport(pageable, null, start, end);
-
-        assertThat(result.getContent()).isEmpty();
-    }
-
-    @Test
-    void accountStatementReport_ShouldReturnReports_WhenCustomerIdPresent() {
-        Pageable pageable = PageRequest.of(0, 1);
-        when(repository.findByCustomerIdAndStartDateAndEndDate(any(), anyLong(), any(), any()))
-                .thenReturn(new PageImpl<>(List.of(account)));
-
-        when(customerClient.show(anyLong())).thenReturn(customerDto);
-
-        account.setMovements(Set.of());
-        Page<AccountStatementReport> result = service.accountStatementReport(pageable, 1L,
-                LocalDate.of(2025, 8, 1), LocalDate.of(2025, 8, 2));
-
-        assertThat(result.getContent()).hasSize(1);
-    }
 }
