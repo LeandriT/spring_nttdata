@@ -53,7 +53,7 @@ Recupera una lista de clientes según los IDs proporcionados.
   "address": "Calle Falsa 123",
   "phone": "0999999999",
   "password": "secreto",
-  "isActive": true
+  "is_active": true
 }
 ```
 
@@ -68,7 +68,7 @@ Recupera una lista de clientes según los IDs proporcionados.
   "dni": "1234567890",
   "address": "Calle Falsa 123",
   "phone": "0999999999",
-  "isActive": true,
+  "is_active": true,
   "createdAt": "2025-08-01T12:00:00",
   "updatedAt": "2025-08-02T10:00:00"
 }
