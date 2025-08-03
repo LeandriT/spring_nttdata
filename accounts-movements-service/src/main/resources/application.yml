@@ -11,6 +11,8 @@ spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
   kafka:
+    admin:
+      auto-create: true
     bootstrap-servers: ${GLOBAL_KAFKA_HOST_PLAIN:localhost:9092}
     consumer:
       group-id: ${MS_NAME:account_service}
@@ -52,7 +54,7 @@ spring:
         format_sql: true
 
 server:
-  port: ${SERVER_PORT:8081}
+  port: ${SERVER_PORT:8080}
   servlet:
     context-path: ${SERVLET_CONTEXT_PATH:}
   error:

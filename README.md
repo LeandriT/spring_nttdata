@@ -53,6 +53,9 @@ cuentas y transacciones a los datos de los clientes.
 ## Ejecución
 
 Para ejecutar cada microservicio, siga los siguientes pasos:
+Tener docker - docker compose instalador y ejecutar el comando
+
+docker compose up --build
 
 1. **Clonar el repositorio:**
    ```bash

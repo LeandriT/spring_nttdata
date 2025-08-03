@@ -274,6 +274,7 @@ public class AccountServiceImpl implements AccountService {
         return MovementAccountStatementReport.builder()
                 .date(movement.getDate())
                 .balance(movement.getBalance())
+                .amount(movement.getAmount())
                 .movementType(movement.getMovementType())
                 .build();
     }

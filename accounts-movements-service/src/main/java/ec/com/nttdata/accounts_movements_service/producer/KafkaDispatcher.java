@@ -1,7 +1,6 @@
 package ec.com.nttdata.accounts_movements_service.producer;
 
 
-
 import ec.com.nttdata.accounts_movements_service.config.kafka.KafkaMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +20,8 @@ public class KafkaDispatcher extends KafkaMessage {
     public void sendMessage(Object data, String topic, String action) {
         KafkaMessage message = buildMessage(data, action);
         try {
+
+            Thread.sleep(5000); // esperar para evitar LEADER_NOT_AVAILABLE
             String response = producer.send(topic, message).get().toString();
             log.trace(response);
         } catch (Exception e) {

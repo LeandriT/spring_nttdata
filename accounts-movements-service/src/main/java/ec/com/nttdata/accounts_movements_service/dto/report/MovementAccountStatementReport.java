@@ -17,6 +17,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MovementAccountStatementReport {
     private BigDecimal balance;
+    private BigDecimal amount;
     private LocalDateTime date;
     private MovementTypeEnum movementType;
 

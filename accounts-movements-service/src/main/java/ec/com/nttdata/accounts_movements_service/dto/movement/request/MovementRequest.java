@@ -27,4 +27,8 @@ public class MovementRequest {
     private Long accountId;
     @JsonIgnore
     private boolean isStart;
+
+    @JsonIgnore
+    private BigDecimal balance;
+
 }

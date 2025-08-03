@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d69415f3-1912-4b88-b785-5aca8d33c3f0" name="Changes" comment="fix: git ignore">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build-and-run.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts-movements-service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/accounts-movements-service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/dto/movement/request/MovementRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/dto/movement/request/MovementRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/dto/report/MovementAccountStatementReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/dto/report/MovementAccountStatementReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/event_handler/MovementEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/event_handler/MovementEventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/producer/KafkaDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/producer/KafkaDispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/producer/customer/EventAccountCustomerPublisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/producer/customer/EventAccountCustomerPublisher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/service/impl/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/service/impl/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts-movements-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/accounts-movements-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer-service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/customer-service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer-service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/customer-service/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer-service/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer-service/src/main/java/ec/com/nttdata/customer_service/listener/Topics.java" beforeDir="false" afterPath="$PROJECT_DIR$/customer-service/src/main/java/ec/com/nttdata/customer_service/listener/Topics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer-service/src/main/java/ec/com/nttdata/customer_service/listener/eventTransaction/dto/TransactionCustomerDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/customer-service/src/main/java/ec/com/nttdata/customer_service/listener/eventTransaction/dto/TransactionCustomerDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer-service/src/main/java/ec/com/nttdata/customer_service/service/impl/CustomerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/customer-service/src/main/java/ec/com/nttdata/customer_service/service/impl/CustomerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/customer-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer-service/src/test/java/ec/com/nttdata/customer_service/controller/CustomerControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/customer-service/src/test/java/ec/com/nttdata/customer_service/controller/CustomerControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer-service/src/test/java/ec/com/nttdata/customer_service/service/impl/CustomerServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/customer-service/src/test/java/ec/com/nttdata/customer_service/service/impl/CustomerServiceImplTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/accounts-movements-service">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/customer-service">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/customer-service">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="customer-service" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="customer-service" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="customer-service" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "LeandriT"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/LeandriT/spring_nttdata.git",
+    "accountId": "abf944ce-d316-4e82-9dfc-899dada3bf61"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="30mb2bHPV1N4AhggyNGA6mFBon5" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.CustomerControllerTest.executor": "Run",
+    "Gradle.accounts-movements-service [:ec.com.nttdata.accounts_movements_service.AccountsMovementsServiceApplication.main()].executor": "Debug",
+    "Gradle.customer-service [:ec.com.nttdata.customer_service.CustomerServiceApplication.main()].executor": "Debug",
+    "Gradle.customer-service [test].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/gandhycuasapas/Documents/EJECICIOS EMPRESAS/spring_nttdata",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.CustomerServiceApplication">
+    <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
+      <option name="appName" />
+      <option name="appServicePlanName" />
+      <option name="appServicePlanResourceGroup" />
+      <option name="appSettingsKey" value="bbfbcaea-4068-415f-9193-2cbaea58e07b" />
+      <option name="artifact" />
+      <option name="debugOptions" />
+      <option name="deployment" />
+      <option name="deploymentStagingDirectoryPath" />
+      <option name="funcPath" />
+      <option name="functionHostArguments" />
+      <option name="hostJsonPath" />
+      <option name="insightsName" />
+      <option name="instrumentationKey" />
+      <option name="javaVersion" />
+      <option name="localSettingsJsonPath" />
+      <option name="moduleName" />
+      <option name="os" />
+      <option name="pricingTier" />
+      <option name="providerMap">
+        <map />
+      </option>
+      <option name="region" />
+      <option name="resourceGroup" />
+      <option name="stagingFolder" />
+      <option name="subscription" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AccountsMovementsServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ec.com.nttdata.accounts_movements_service.AccountsMovementsServiceApplication" />
+      <module name="accounts-movements-service.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ec.com.nttdata.accounts_movements_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomerServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ec.com.nttdata.customer_service.CustomerServiceApplication" />
+      <module name="customer-service.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ec.com.nttdata.customer_service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomerControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/customer-service" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ec.com.nttdata.customer_service.controller.CustomerControllerTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="customer-service [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/customer-service" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.CustomerServiceApplication" />
+        <item itemvalue="Application.AccountsMovementsServiceApplication" />
+        <item itemvalue="Gradle.customer-service [test]" />
+        <item itemvalue="Gradle.CustomerControllerTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d69415f3-1912-4b88-b785-5aca8d33c3f0" name="Changes" comment="" />
+      <created>1754235489073</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1754235489073</updated>
+    </task>
+    <task id="LOCAL-00001" summary="fix: git ignore">
+      <option name="closed" value="true" />
+      <created>1754235824960</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1754235824960</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix: git ignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: git ignore" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/service/impl/MovementServiceImpl.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/service/impl/AccountServiceImpl.java</url>
+          <line>183</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/accounts-movements-service/src/main/java/ec/com/nttdata/accounts_movements_service/service/impl/AccountServiceImpl.java</url>
+          <line>245</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

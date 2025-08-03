@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import ec.com.nttdata.customer_service.config.TestSecurityConfig;
 import ec.com.nttdata.customer_service.dto.request.CustomerRequest;
 import ec.com.nttdata.customer_service.dto.response.CustomerResponse;
@@ -19,6 +20,7 @@ import ec.com.nttdata.customer_service.service.CustomerService;
 import java.util.Collections;
 import java.util.Random;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,13 @@ class CustomerControllerTest {
     @InjectMocks
     private CustomerController customerController;
     private final String path = "/customers";
+    private ObjectMapper objectMapper;
+
+    @BeforeEach()
+    void setUp() {
+        objectMapper = new ObjectMapper();
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+    }
 
     @Test
     void testGetIndex() throws Exception {
@@ -86,7 +95,7 @@ class CustomerControllerTest {
 
         mockMvc.perform(post(path)
                         .contentType("application/json")
-                        .content(new ObjectMapper().writeValueAsString(customerRequest)))
+                        .content(objectMapper.writeValueAsString(customerRequest)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(
                         Matchers.equalTo(customerDto.getId()))); // Adjust the jsonPath as per your DTO
@@ -102,7 +111,7 @@ class CustomerControllerTest {
 
         mockMvc.perform(put(path + "/{uuid}", uuid)
                         .contentType("application/json")
-                        .content(new ObjectMapper().writeValueAsString(customerRequest)))
+                        .content(objectMapper.writeValueAsString(customerRequest)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(
                         Matchers.equalTo(customerDto.getId()))); // Adjust the jsonPath as per your DTO
@@ -117,6 +126,21 @@ class CustomerControllerTest {
                 .andExpect(status().isNoContent());
     }
 
+    @Test
+    void testGetCustomersByIds() throws Exception {
+        Long id = new Random().nextLong();
+        CustomerResponse customerDto = this.buildCustomerResponse();
+        customerDto.setId(id);
+
+        when(customerService.findByIds(any())).thenReturn(Collections.singletonList(customerDto));
+
+        mockMvc.perform(post(path + "/by-ids")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(Collections.singletonList(id))))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value(Matchers.equalTo(id)));
+    }
+
     private CustomerRequest buildCustomerRequest() {
         CustomerRequest object = new CustomerRequest();
         object.setName("JUAN");
@@ -124,8 +148,9 @@ class CustomerControllerTest {
         object.setAge(12);
         object.setDni("1703256897");
         object.setAddress("QUITO");
-        object.setPhone("");
+        object.setPhone("0983642886");
         object.setPassword("12345");
+        object.setIsActive(true);
         return object;
     }
 

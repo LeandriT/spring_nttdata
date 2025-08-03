@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class TransactionCustomerDto implements Serializable {
-    private String customerId;
+    private Long customerId;
     private BigDecimal amount;
-    private String transactionType;
+    private String movementType;
 }

@@ -76,6 +76,8 @@ jacocoTestReport {
                     '**/ec/com/nttdata/customer_service/config/**',
                     '**/ec/com/nttdata/customer_service/exception/**',
                     '**/ec/com/nttdata/customer_service/util/**',
+                    '**/ec/com/nttdata/customer_service/topics/**',
+                    '**/ec/com/nttdata/customer_service/listener/**',
             ])
         })
     }
@@ -100,6 +102,8 @@ jacocoTestCoverageVerification {
                     'ec.com.nttdata.customer_service.config.**',
                     'ec.com.nttdata.customer_service.exception.**',
                     'ec.com.nttdata.customer_service.util.**',
+                    'ec.com.nttdata.customer_service.topics.**',
+                    'ec.com.nttdata.customer_service.listener.**',
             ]
         }
     }

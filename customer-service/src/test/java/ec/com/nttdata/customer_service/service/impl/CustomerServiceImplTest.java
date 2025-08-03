@@ -14,10 +14,12 @@ import ec.com.nttdata.customer_service.dto.response.CustomerResponse;
 import ec.com.nttdata.customer_service.exception.CustomerDniFoundException;
 import ec.com.nttdata.customer_service.exception.CustomerDniInvalidException;
 import ec.com.nttdata.customer_service.exception.CustomerNotFoundException;
+import ec.com.nttdata.customer_service.listener.eventTransaction.dto.TransactionCustomerDto;
 import ec.com.nttdata.customer_service.mapper.CustomerMapper;
 import ec.com.nttdata.customer_service.model.Customer;
 import ec.com.nttdata.customer_service.repository.CustomerRepository;
 import ec.com.nttdata.customer_service.util.IdentificationValidator;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -189,5 +191,29 @@ public class CustomerServiceImplTest {
 
         assertEquals(1, result.getContent().size());
         assertEquals(customerDto.getDni(), result.getContent().get(0).getDni());
+    }
+
+    @Test
+    void eventTransactionAccountProcessed_logsCorrectly() {
+        TransactionCustomerDto transactionDto = new TransactionCustomerDto();
+        transactionDto.setCustomerId(1L);
+        transactionDto.setAmount(BigDecimal.valueOf(100.0));
+        transactionDto.setMovementType("DEPOSIT");
+
+        // No exception expected, just verifying it runs
+        customerService.eventTransactionAccountProcessed(transactionDto);
+    }
+
+    @Test
+    void findByIds_ReturnsCustomerDtos() {
+        List<Long> ids = List.of(1L, 2L);
+        List<Customer> customers = List.of(customer, customer);
+        when(repository.findAllById(ids)).thenReturn(customers);
+        when(customerMapper.toResponse(any(Customer.class))).thenReturn(customerDto);
+
+        List<CustomerResponse> result = customerService.findByIds(ids);
+
+        assertEquals(2, result.size());
+        verify(repository).findAllById(ids);
     }
 }

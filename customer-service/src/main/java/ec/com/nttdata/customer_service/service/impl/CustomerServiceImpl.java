@@ -71,10 +71,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void eventTransactionAccountProcessed(TransactionCustomerDto transactionCustomerDto) {
         String message = String.format(
-                "Account transaction event processed: id: %s amount: %.2f type: %s",
+                "Account transaction event processed: id: %d amount: %.2f type: %s",
                 transactionCustomerDto.getCustomerId(),
                 transactionCustomerDto.getAmount(),
-                transactionCustomerDto.getTransactionType()
+                transactionCustomerDto.getMovementType()
         );
         log.info(message);
     }

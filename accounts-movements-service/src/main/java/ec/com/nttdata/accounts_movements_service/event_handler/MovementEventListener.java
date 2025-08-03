@@ -22,6 +22,7 @@ public class MovementEventListener implements ApplicationListener<MovementDto> {
         MovementRequest request = MovementRequest.builder()
                 .accountId(event.getAccountId())
                 .amount(event.getAmount())
+                .balance(event.getBalance())
                 .movementType(event.getMovementType())
                 .date(event.getDate())
                 .isStart(event.isStart())
