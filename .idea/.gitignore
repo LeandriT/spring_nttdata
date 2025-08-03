@@ -1,0 +1,34 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Gradle
+.gradle/
+build/
+
+account-service/.gradle/
+account-service/build/
+account-service/.idea/
+
+customer-service/.gradle/
+customer-service/build/
+customer-service/.idea/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# Logs
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Other
+*.tmp
+*.swp
+*.swo
