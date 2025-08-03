@@ -1,0 +1,127 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'org.springframework.boot' version '3.2.5' // ✅ VERSIÓN COMPATIBLE
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'ec.com.nttdata'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2023.0.0"
+        // ✅ Cloud 2023 compatible con Boot 3.2.x
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.kafka:spring-kafka'
+
+    // H2 Database
+    runtimeOnly 'com.h2database:h2'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // Spring Cloud Feign
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+    // Resilience4j (compatible con Spring Boot 3.2)
+    implementation 'io.github.resilience4j:resilience4j-spring-boot3'
+    implementation 'io.github.resilience4j:resilience4j-all'
+
+    // MapStruct
+    implementation 'org.mapstruct:mapstruct:1.6.2'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2'
+
+    // Test dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.kafka:spring-kafka-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        exceptionFormat = 'full'
+    }
+    exclude '**/ec/com/nttdata/accounts_movements_service/AccountsMovementsService*IntegrationTest*'
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        html.required = true
+        xml.required = true
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+    afterEvaluate {
+        getClassDirectories().setFrom(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    '**/ec/com/nttdata/accounts_movements_service/AccountsMovementsServiceApplication*',
+                    '**/ec/com/nttdata/accounts_movements_service/dto/**',
+                    '**/ec/com/nttdata/accounts_movements_service/mapper/**',
+                    '**/ec/com/nttdata/accounts_movements_service/model/**',
+                    '**/ec/com/nttdata/accounts_movements_service/repository/**',
+                    '**/ec/com/nttdata/accounts_movements_service/config/**',
+                    '**/ec/com/nttdata/accounts_movements_service/exception/**',
+                    '**/ec/com/nttdata/accounts_movements_service/event_handler/**',
+                    '**/ec/com/nttdata/accounts_movements_service/client/**',
+                    '**/ec/com/nttdata/accounts_movements_service/producer/**',
+                    '**/ec/com/nttdata/accounts_movements_service/enums/**',
+            ])
+        })
+    }
+}
+
+jacocoTestCoverageVerification {
+    dependsOn jacocoTestReport
+    violationRules {
+        rule {
+            element = 'CLASS'
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.85
+            }
+            excludes = [
+                    'ec.com.nttdata.accounts_movements_service.AccountsMovementsServiceApplication',
+                    'ec.com.nttdata.accounts_movements_service.dto.**',
+                    'ec.com.nttdata.accounts_movements_service.mapper.**',
+                    'ec.com.nttdata.accounts_movements_service.model.**',
+                    'ec.com.nttdata.accounts_movements_service.repository.**',
+                    'ec.com.nttdata.accounts_movements_service.config.**',
+                    'ec.com.nttdata.accounts_movements_service.exception.**',
+                    'ec.com.nttdata.accounts_movements_service.client.**',
+                    'ec.com.nttdata.accounts_movements_service.event_handler.**',
+                    'ec.com.nttdata.accounts_movements_service.producer.**',
+                    'ec.com.nttdata.accounts_movements_service.enums.**',
+            ]
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification

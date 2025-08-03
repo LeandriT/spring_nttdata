@@ -1,0 +1,54 @@
+app:
+  description: customer service is a Spring Boot application
+  name: customer_service
+  environment: ${ENVIRONMENT:dev}
+
+spring:
+  kafka:
+    bootstrap-servers: ${GLOBAL_KAFKA_HOST_PLAIN:localhost:9092}
+    consumer:
+      group-id: ${MS_NAME:customer_service}
+      bootstrap-servers: ${GLOBAL_KAFKA_HOST_PLAIN:localhost:9092}
+
+  output:
+    ansi:
+      enabled: ALWAYS
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:customers;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 1
+      idle-timeout: 10000
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    # Cambia esto a "none" para evitar que Hibernate cree las tablas
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        jdbc:
+          time_zone: ${TIME_ZONE:UTC}
+        format_sql: true
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: ${SERVLET_CONTEXT_PATH:}
+  error:
+    include-stacktrace: always
+    include-message: always
