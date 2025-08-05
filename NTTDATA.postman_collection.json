@@ -1,368 +1,412 @@
 {
-  "info": {
-    "_postman_id": "fc8040c1-249c-46f4-a403-a5da56ba7eca",
-    "name": "NTTDATA",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "1378372"
-  },
-  "item": [
-    {
-      "name": "CUSTOMER",
-      "item": [
-        {
-          "name": "Customers Paginated",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{url}}:8080/{{api}}customers?page=0&size=100",
-              "host": [
-                "{{url}}"
-              ],
-              "port": "8080",
-              "path": [
-                "{{api}}customers"
-              ],
-              "query": [
-                {
-                  "key": "page",
-                  "value": "0"
-                },
-                {
-                  "key": "size",
-                  "value": "100"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Customer",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{url}}:8080/{{api}}customers/3",
-              "host": [
-                "{{url}}"
-              ],
-              "port": "8080",
-              "path": [
-                "{{api}}customers",
-                "3"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Customer",
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"name\": \"Olga Ponce\",\n    \"gender\": \"FEMALE\",\n    \"age\": 64,\n    \"dni\": \"1707401707\",\n    \"address\": \"Test Address 456\",\n    \"phone\": \"+593999888777\",\n    \"password\": \"12345\",\n    \"is_active\": true\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{url}}:8080/{{api}}customers",
-              "host": [
-                "{{url}}"
-              ],
-              "port": "8080",
-              "path": [
-                "{{api}}customers"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Customer",
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"name\": \"Olga Maria Ponce Unigarro\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{url}}:8080/{{api}}customers/2",
-              "host": [
-                "{{url}}"
-              ],
-              "port": "8080",
-              "path": [
-                "{{api}}customers",
-                "2"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Customer",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{url}}:8080/{{api}}customers/3",
-              "host": [
-                "{{url}}"
-              ],
-              "port": "8080",
-              "path": [
-                "{{api}}customers",
-                "3"
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "ACCOUNT_MOVEMENTS",
-      "item": [
-        {
-          "name": "ACCOUNT",
-          "item": [
-            {
-              "name": "Accounts",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{url}}:8081/accounts",
-                  "host": [
-                    "{{url}}"
-                  ],
-                  "port": "8081",
-                  "path": [
-                    "accounts"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Account",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{url}}:8081/accounts/2",
-                  "host": [
-                    "{{url}}"
-                  ],
-                  "port": "8081",
-                  "path": [
-                    "accounts",
-                    "2"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Account",
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n    \"account_number\": \"1234567890\",\n    \"account_type\": \"AHORROS\",\n    \"initial_balance\": 100.00,\n    \"status\": true,\n    \"customer_id\": 2\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{url}}:8081/accounts",
-                  "host": [
-                    "{{url}}"
-                  ],
-                  "port": "8081",
-                  "path": [
-                    "accounts"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Account",
-              "request": {
-                "method": "PUT",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n    \"account_number\": \"12345678901\",\n    \"customer_id\": 2\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{url}}:8081/accounts/2",
-                  "host": [
-                    "{{url}}"
-                  ],
-                  "port": "8081",
-                  "path": [
-                    "accounts",
-                    "2"
-                  ]
-                }
-              },
-              "response": []
-            }
-          ]
-        },
-        {
-          "name": "MOVEMENT",
-          "item": [
-            {
-              "name": "Movements",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{url}}:8081/{{api}}movements",
-                  "host": [
-                    "{{url}}"
-                  ],
-                  "port": "8081",
-                  "path": [
-                    "{{api}}movements"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Movement",
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n    \"account_id\": 2,\n    \"date\": \"2025-08-01T14:01:00\",\n    \"movement_type\": \"RETIRO\",\n    \"amount\": 100\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{url}}:8081/movements",
-                  "host": [
-                    "{{url}}"
-                  ],
-                  "port": "8081",
-                  "path": [
-                    "movements"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Movement",
-              "request": {
-                "method": "PUT",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n    \"amount\": 11000.00,\n    \"account_id\": 1\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{url}}:8081/movements/1",
-                  "host": [
-                    "{{url}}"
-                  ],
-                  "port": "8081",
-                  "path": [
-                    "movements",
-                    "1"
-                  ]
-                }
-              },
-              "response": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "REPORTS",
-      "item": [
-        {
-          "name": "Movements By Dates",
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{url}}:8081/reports?startDate=2025-08-01&endDate=2025-08-10&page=0&size=100",
-              "host": [
-                "{{url}}"
-              ],
-              "port": "8081",
-              "path": [
-                "reports"
-              ],
-              "query": [
-                {
-                  "key": "customerId",
-                  "value": "2",
-                  "disabled": true
-                },
-                {
-                  "key": "startDate",
-                  "value": "2025-08-01"
-                },
-                {
-                  "key": "endDate",
-                  "value": "2025-08-10"
-                },
-                {
-                  "key": "page",
-                  "value": "0"
-                },
-                {
-                  "key": "size",
-                  "value": "100"
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    }
-  ]
+	"info": {
+		"_postman_id": "fc8040c1-249c-46f4-a403-a5da56ba7eca",
+		"name": "NTTDATA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1378372"
+	},
+	"item": [
+		{
+			"name": "CUSTOMER",
+			"item": [
+				{
+					"name": "Customers Paginated",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:8080/{{api}}customers?page=0&size=100",
+							"host": [
+								"{{url}}"
+							],
+							"port": "8080",
+							"path": [
+								"{{api}}customers"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:8080/{{api}}customers/3",
+							"host": [
+								"{{url}}"
+							],
+							"port": "8080",
+							"path": [
+								"{{api}}customers",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Olga Ponce\",\n    \"gender\": \"FEMALE\",\n    \"age\": 64,\n    \"dni\": \"1707401707\",\n    \"address\": \"Test Address 456\",\n    \"phone\": \"+593999888777\",\n    \"password\": \"12345\",\n    \"is_active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:8080/{{api}}customers",
+							"host": [
+								"{{url}}"
+							],
+							"port": "8080",
+							"path": [
+								"{{api}}customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Olga Maria Ponce Unigarro\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:8080/{{api}}customers/2",
+							"host": [
+								"{{url}}"
+							],
+							"port": "8080",
+							"path": [
+								"{{api}}customers",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:8080/{{api}}customers/3",
+							"host": [
+								"{{url}}"
+							],
+							"port": "8080",
+							"path": [
+								"{{api}}customers",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ACCOUNT_MOVEMENTS",
+			"item": [
+				{
+					"name": "ACCOUNT",
+					"item": [
+						{
+							"name": "Accounts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}:8081/accounts",
+									"host": [
+										"{{url}}"
+									],
+									"port": "8081",
+									"path": [
+										"accounts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Account",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}:8081/accounts/2",
+									"host": [
+										"{{url}}"
+									],
+									"port": "8081",
+									"path": [
+										"accounts",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Account",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"account_number\": \"1234567890\",\n    \"account_type\": \"AHORROS\",\n    \"initial_balance\": 100.00,\n    \"status\": true,\n    \"customer_id\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}:8081/accounts",
+									"host": [
+										"{{url}}"
+									],
+									"port": "8081",
+									"path": [
+										"accounts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Account",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"account_number\": \"12345678901\",\n    \"customer_id\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}:8081/accounts/2",
+									"host": [
+										"{{url}}"
+									],
+									"port": "8081",
+									"path": [
+										"accounts",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "MOVEMENT",
+					"item": [
+						{
+							"name": "Movements",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}:8081/{{api}}movements",
+									"host": [
+										"{{url}}"
+									],
+									"port": "8081",
+									"path": [
+										"{{api}}movements"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Movement",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"account_id\": 2,\n    \"date\": \"2025-08-01T14:01:00\",\n    \"movement_type\": \"RETIRO\",\n    \"amount\": 100\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}:8081/movements",
+									"host": [
+										"{{url}}"
+									],
+									"port": "8081",
+									"path": [
+										"movements"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Movement",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 11000.00,\n    \"account_id\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}:8081/movements/1",
+									"host": [
+										"{{url}}"
+									],
+									"port": "8081",
+									"path": [
+										"movements",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "REPORTS",
+			"item": [
+				{
+					"name": "Movements By Dates V1",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:8081/reports/v1?customerId=2&page=0&size=100&startDate=2022-02-08&endDate=2025-02-10",
+							"host": [
+								"{{url}}"
+							],
+							"port": "8081",
+							"path": [
+								"reports",
+								"v1"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "100"
+								},
+								{
+									"key": "startDate",
+									"value": "2022-02-08"
+								},
+								{
+									"key": "endDate",
+									"value": "2025-02-10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Movements By Dates V2",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:8081/reports?startDate=2025-08-01&endDate=2025-08-10&page=0&size=100",
+							"host": [
+								"{{url}}"
+							],
+							"port": "8081",
+							"path": [
+								"reports"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "startDate",
+									"value": "2025-08-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2025-08-10"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
 }
