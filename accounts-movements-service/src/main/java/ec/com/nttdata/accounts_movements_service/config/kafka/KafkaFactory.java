@@ -20,7 +20,8 @@ public class KafkaFactory {
     }
 
     @Bean(name = "config.kafka.consumerFactory")
-    public ConcurrentKafkaListenerContainerFactory<String, KafkaMessage> consumerFactory(KafkaProperties kafkaProperties) {
+    public ConcurrentKafkaListenerContainerFactory<String, KafkaMessage> consumerFactory(
+            KafkaProperties kafkaProperties) {
         ConcurrentKafkaListenerContainerFactory<String, KafkaMessage> containerFactory =
                 new ConcurrentKafkaListenerContainerFactory<>();
 

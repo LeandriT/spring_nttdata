@@ -3,9 +3,12 @@
 -- se respeten en minúsculas.
 
 -- Insertar datos en la tabla de clientes
-INSERT INTO "customers" ("id", "customer_id", "name", "gender", "age", "dni", "address", "phone", "password", "is_active", "created_at", "updated_at")
-VALUES (1, '0f4c515a-7b23-4197-bbb9-f9823a676729', 'Gandhy Cuasapas', 'Hombre', 30, '0401590039', 'Otavalo sn y principal', '098254785', '827ccb0eea8a706c4c34a16891f84e7b', true, NOW(), NULL );
-
+INSERT INTO "customers" (
+    "customer_id", "name", "gender", "age", "dni", "address", "phone", "password", "is_active", "created_at"
+) VALUES
+('CUST001', 'Jose Lema', 'M', 30, '100000001', 'Otavalo sn y principal', '098254785', '1234', true, NOW()),
+('CUST002', 'Marianela Montalvo', 'F', 28, '100000002', 'Amazonas y NNUU', '097548965', '5678', true, NOW()),
+('CUST003', 'Juan Osorio', 'M', 32, '100000003', '13 junio y Equinoccial', '098874587', '1245', true, NOW());
 -- Sincronizar el contador de autoincremento para la tabla de clientes
 -- Esto asegura que el próximo ID generado sea mayor que el último ID insertado.
 ALTER TABLE "customers" ALTER COLUMN "id" RESTART WITH (SELECT MAX("id") + 1 FROM "customers");

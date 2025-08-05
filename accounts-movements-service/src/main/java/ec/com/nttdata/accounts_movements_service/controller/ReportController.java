@@ -1,6 +1,7 @@
 package ec.com.nttdata.accounts_movements_service.controller;
 
 import ec.com.nttdata.accounts_movements_service.dto.report.AccountStatementReport;
+import ec.com.nttdata.accounts_movements_service.dto.report.PlainMovementReport;
 import ec.com.nttdata.accounts_movements_service.service.ReportService;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -22,8 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReportController {
     private final ReportService service;
 
-    @GetMapping()
-    public ResponseEntity<Page<AccountStatementReport>> reportV3(
+    @GetMapping("/v1")
+    public ResponseEntity<Page<AccountStatementReport>> reportV1(
             Pageable pageable,
 
             @RequestParam("startDate")
@@ -44,5 +45,30 @@ public class ReportController {
         Page<AccountStatementReport> accountStatementReports =
                 service.accountStatementReport(pageable, customerId, startDate, endDate);
         return ResponseEntity.ok(accountStatementReports);
+    }
+
+    @GetMapping("/v2")
+    public ResponseEntity<Page<PlainMovementReport>> reportV2(
+            Pageable pageable,
+
+            @RequestParam("startDate")
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            @NotNull(message = "Start date is required") LocalDate startDate,
+
+            @RequestParam("endDate")
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            @NotNull(message = "End date is required") LocalDate endDate,
+
+            @RequestParam(value = "customerId", required = false)
+            Long customerId
+    ) {
+        if (startDate.isAfter(endDate)) {
+            throw new IllegalArgumentException("Start date must be before or equal to end date");
+        }
+
+
+        Page<PlainMovementReport> plainMovementReports =
+                service.generatePlainReport(pageable, customerId, startDate, endDate);
+        return ResponseEntity.ok(plainMovementReports);
     }
 }

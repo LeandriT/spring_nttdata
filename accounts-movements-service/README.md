@@ -1,6 +1,7 @@
 # Accounts & Movements Service
 
-Microservicio encargado de la gestión de cuentas bancarias y movimientos (depósitos, retiros), así como la generación de reportes de estado de cuenta.
+Microservicio encargado de la gestión de cuentas bancarias y movimientos (depósitos, retiros), así como la generación de
+reportes de estado de cuenta.
 
 ## 🛠️ Tecnologías
 
@@ -42,16 +43,16 @@ accounts-movements-service/
 
 Ruta base: `/accounts`
 
-| Método | Ruta                            | Descripción                              |
-|--------|----------------------------------|------------------------------------------|
-| GET    | `/`                              | Listar cuentas paginadas                 |
-| GET    | `/{id}`                          | Obtener una cuenta por ID                |
-| POST   | `/`                              | Crear una cuenta                         |
-| PUT    | `/{id}`                          | Actualizar una cuenta                    |
-| DELETE | `/{id}`                          | Eliminar una cuenta                      |
-| GET    | `/statement-report`              | Obtener reporte de estado de cuenta      |
+| Método | Ruta    | Descripción               |
+|--------|---------|---------------------------|
+| GET    | `/`     | Listar cuentas paginadas  |
+| GET    | `/{id}` | Obtener una cuenta por ID |
+| POST   | `/`     | Crear una cuenta          |
+| PUT    | `/{id}` | Actualizar una cuenta     |
+| DELETE | `/{id}` | Eliminar una cuenta       |
 
 **Parámetros para reporte:**
+
 - `customerId` (opcional)
 - `startDate`, `endDate` (obligatorios, formato: `yyyy-MM-dd`)
 - `page`, `size` (opcional)
@@ -62,13 +63,24 @@ Ruta base: `/accounts`
 
 Ruta base: `/movements`
 
-| Método | Ruta       | Descripción                        |
-|--------|------------|------------------------------------|
-| GET    | `/`        | Listar movimientos paginados       |
-| GET    | `/{id}`    | Obtener movimiento por ID          |
-| POST   | `/`        | Registrar nuevo movimiento         |
-| PUT    | `/{id}`    | Actualizar movimiento existente    |
-| DELETE | `/{id}`    | Eliminar un movimiento             |
+| Método | Ruta    | Descripción                     |
+|--------|---------|---------------------------------|
+| GET    | `/`     | Listar movimientos paginados    |
+| GET    | `/{id}` | Obtener movimiento por ID       |
+| POST   | `/`     | Registrar nuevo movimiento      |
+| PUT    | `/{id}` | Actualizar movimiento existente |
+| DELETE | `/{id}` | Eliminar un movimiento          |
+
+---
+
+### 💰 `ReportController`
+
+Ruta base: `/reports`
+
+| Método | Ruta  | Descripción                           |
+|--------|-------|---------------------------------------|
+| GET    | `/v1` | Reporte de estado de cuenta detallado |
+| GET    | `/v2` | Reporte de estado de cuenta unificado |
 
 ---
 
@@ -105,7 +117,8 @@ Este microservicio se comunica con:
 
 ## 🧾 Eventos Asíncronos
 
-- Se publican eventos con `ApplicationEventPublisher` y `EventAccountCustomerPublisher` al crear o actualizar movimientos.
+- Se publican eventos con `ApplicationEventPublisher` y `EventAccountCustomerPublisher` al crear o actualizar
+  movimientos.
 - Los eventos incluyen información del balance actualizado.
 
 ---

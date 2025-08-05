@@ -2,7 +2,6 @@ package ec.com.nttdata.accounts_movements_service.event_handler.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

@@ -4,7 +4,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import ec.com.nttdata.accounts_movements_service.service.ReportService;
 import java.time.LocalDate;
 import java.util.Collections;
@@ -15,8 +14,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(ReportController.class)
@@ -28,62 +25,103 @@ class ReportControllerTest {
     @MockBean
     private ReportService reportService;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    private final String path = "/reports";
+    private final String pathV1 = "/reports/v1";
+    private final String pathV2 = "/reports/v2";
 
     @Test
-    void testReportWithCustomerId() throws Exception {
-
+    void testReportV1WithCustomerId() throws Exception {
         LocalDate start = LocalDate.now().minusDays(10);
         LocalDate end = LocalDate.now();
 
         Mockito.when(
-                        reportService.accountStatementReport(Mockito.any(), Mockito.eq(1L), Mockito.eq(start),
-                                Mockito.eq(end)))
-                .thenReturn(new PageImpl<>(Collections.emptyList()));
+                reportService.accountStatementReport(Mockito.any(), Mockito.eq(1L), Mockito.eq(start), Mockito.eq(end))
+        ).thenReturn(new PageImpl<>(Collections.emptyList(), PageRequest.of(0, 10), 0));
 
-        mockMvc.perform(get(path)
+        mockMvc.perform(get(pathV1)
                         .param("page", "0")
                         .param("size", "10")
                         .param("customerId", "1")
                         .param("startDate", start.toString())
-                        .param("endDate", end.toString())
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .param("endDate", end.toString()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content").isArray());
     }
 
     @Test
-    void testReportWithoutCustomerId() throws Exception {
-
+    void testReportV1WithoutCustomerId() throws Exception {
         LocalDate start = LocalDate.now().minusDays(10);
         LocalDate end = LocalDate.now();
 
-        Mockito.when(reportService.accountStatementReport(Mockito.any(), Mockito.isNull(), Mockito.eq(start),
-                        Mockito.eq(end)))
-                .thenReturn(new PageImpl<>(Collections.emptyList()));
+        Mockito.when(
+                reportService.accountStatementReport(Mockito.any(), Mockito.isNull(), Mockito.eq(start),
+                        Mockito.eq(end))
+        ).thenReturn(new PageImpl<>(Collections.emptyList(), PageRequest.of(0, 10), 0));
 
-        mockMvc.perform(get(path)
+        mockMvc.perform(get(pathV1)
                         .param("page", "0")
                         .param("size", "10")
                         .param("startDate", start.toString())
-                        .param("endDate", end.toString())
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .param("endDate", end.toString()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content").isArray());
     }
 
     @Test
-    void testReportStartDateAfterEndDateShouldFail() throws Exception {
+    void testReportV1StartDateAfterEndDateShouldFail() throws Exception {
         LocalDate start = LocalDate.now();
         LocalDate end = start.minusDays(1);
 
-        mockMvc.perform(get(path)
+        mockMvc.perform(get(pathV1)
                         .param("startDate", start.toString())
-                        .param("endDate", end.toString())
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .param("endDate", end.toString()))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testReportV2WithCustomerId() throws Exception {
+        LocalDate start = LocalDate.now().minusDays(10);
+        LocalDate end = LocalDate.now();
+
+        Mockito.when(
+                reportService.generatePlainReport(Mockito.any(), Mockito.eq(1L), Mockito.eq(start), Mockito.eq(end))
+        ).thenReturn(new PageImpl<>(Collections.emptyList(), PageRequest.of(0, 10), 0));
+
+        mockMvc.perform(get(pathV2)
+                        .param("page", "0")
+                        .param("size", "10")
+                        .param("customerId", "1")
+                        .param("startDate", start.toString())
+                        .param("endDate", end.toString()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content").isArray());
+    }
+
+    @Test
+    void testReportV2WithoutCustomerId() throws Exception {
+        LocalDate start = LocalDate.now().minusDays(10);
+        LocalDate end = LocalDate.now();
+
+        Mockito.when(
+                reportService.generatePlainReport(Mockito.any(), Mockito.isNull(), Mockito.eq(start), Mockito.eq(end))
+        ).thenReturn(new PageImpl<>(Collections.emptyList(), PageRequest.of(0, 10), 0));
+
+        mockMvc.perform(get(pathV2)
+                        .param("page", "0")
+                        .param("size", "10")
+                        .param("startDate", start.toString())
+                        .param("endDate", end.toString()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content").isArray());
+    }
+
+    @Test
+    void testReportV2StartDateAfterEndDateShouldFail() throws Exception {
+        LocalDate start = LocalDate.now();
+        LocalDate end = start.minusDays(1);
+
+        mockMvc.perform(get(pathV2)
+                        .param("startDate", start.toString())
+                        .param("endDate", end.toString()))
                 .andExpect(status().isBadRequest());
     }
 }

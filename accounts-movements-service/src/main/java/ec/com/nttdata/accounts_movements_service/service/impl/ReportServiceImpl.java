@@ -6,15 +6,21 @@ import ec.com.nttdata.accounts_movements_service.dto.report.AccountStatementRepo
 import ec.com.nttdata.accounts_movements_service.dto.report.CustomerAccountStatementReport;
 import ec.com.nttdata.accounts_movements_service.dto.report.CustomerReport;
 import ec.com.nttdata.accounts_movements_service.dto.report.MovementAccountStatementReport;
+import ec.com.nttdata.accounts_movements_service.dto.report.PlainMovementReport;
+import ec.com.nttdata.accounts_movements_service.enums.MovementTypeEnum;
 import ec.com.nttdata.accounts_movements_service.exception.CustomerNotFoundException;
 import ec.com.nttdata.accounts_movements_service.model.Account;
 import ec.com.nttdata.accounts_movements_service.model.Movement;
 import ec.com.nttdata.accounts_movements_service.repository.AccountRepository;
 import ec.com.nttdata.accounts_movements_service.service.ReportService;
 import feign.FeignException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -92,6 +98,93 @@ public class ReportServiceImpl implements ReportService {
                 .toList();
         log.info("Account statement report generated successfully for customer ID: {}", customerId);
         return new PageImpl<>(reports, pageable, accountsPage.getTotalElements());
+    }
+
+    @Override
+    public Page<PlainMovementReport> generatePlainReport(Pageable pageable, Long customerId,
+                                                         LocalDate startDate, LocalDate endDate) {
+        log.info("Generating plain movement report for customer ID: {} from {} to {}",
+                customerId, startDate, endDate);
+
+        validateDateRange(startDate, endDate);
+
+        LocalDateTime startDateTime = startDate.atStartOfDay();
+        LocalDateTime endDateTime = endDate.atTime(LocalTime.MAX);
+
+        Page<Account> accountsPage;
+        Set<CustomerDto> customers;
+
+        if (Objects.nonNull(customerId)) {
+            validateCustomerExists(customerId);
+            accountsPage = repository.findByCustomerIdAndStartDateAndEndDate(
+                    pageable, customerId, startDateTime, endDateTime
+            );
+            customers = Set.of(fetchCustomer(customerId));
+        } else {
+            accountsPage = repository.findByCustomerIdAndStartDateAndEndDate(
+                    pageable, null, startDateTime, endDateTime
+            );
+            Set<Long> customerIds = accountsPage.getContent().stream()
+                    .map(Account::getCustomerId)
+                    .collect(Collectors.toSet());
+            customers = customerClient.showByIds(customerIds);
+        }
+
+        Map<Long, CustomerDto> customerMap = customers.stream()
+                .collect(Collectors.toMap(CustomerDto::getId, customer -> customer));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+        List<PlainMovementReport> result = new ArrayList<>();
+
+        for (Account account : accountsPage.getContent()) {
+            CustomerDto dto = customerMap.get(account.getCustomerId());
+            if (dto == null) {
+                log.warn("No customer DTO found for account ID: {}", account.getId());
+                continue;
+            }
+
+            // Filtrar y ordenar movimientos en el rango de fechas
+            Set<Movement> movimientosOrdenados = account.getMovements();
+            if (movimientosOrdenados.isEmpty()) {
+                continue; // o skip account
+            }
+
+            BigDecimal saldoInicial = account.getActualBalance();
+            BigDecimal totalMovimientos = BigDecimal.ZERO;
+
+            for (Movement mov : movimientosOrdenados) {
+                if (mov.getMovementType() == MovementTypeEnum.DEPOSIT) {
+                    totalMovimientos = totalMovimientos.add(mov.getAmount());
+                } else if (mov.getMovementType() == MovementTypeEnum.WITHDRAWAL) {
+                    totalMovimientos = totalMovimientos.subtract(mov.getAmount());
+                }
+            }
+
+            LocalDate fechaUltimoMovimiento = movimientosOrdenados.stream().findFirst().get().getDate().toLocalDate();
+
+            List<Movement> sortedMovements = account.getMovements()
+                    .stream()
+                    .sorted(Comparator.comparing(Movement::getDate).reversed())
+                    .toList();
+            BigDecimal lastMovement = sortedMovements.getFirst().getAmount();
+            BigDecimal lastMovementWithSign =
+                    sortedMovements.getFirst().getMovementType().equals(MovementTypeEnum.WITHDRAWAL)
+                            ? lastMovement.negate()
+                            : lastMovement;
+            result.add(PlainMovementReport.builder()
+                    .fecha(formatter.format(fechaUltimoMovimiento))
+                    .cliente(dto.getName())
+                    .numeroCuenta(account.getAccountNumber())
+                    .tipo(account.getAccountType().toString())
+                    .saldoInicial(saldoInicial)
+                    .estado(account.getStatus())
+                    .movimiento(lastMovementWithSign)
+                    .saldoDisponible(totalMovimientos)
+                    .build()
+            );
+        }
+
+        return new PageImpl<>(result, pageable, result.size());
     }
 
     private void validateCustomerExists(Long customerId) {

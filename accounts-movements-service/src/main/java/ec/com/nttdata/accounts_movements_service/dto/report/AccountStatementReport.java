@@ -1,6 +1,10 @@
 package ec.com.nttdata.accounts_movements_service.dto.report;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Builder
 @Getter

@@ -9,7 +9,9 @@ import static org.mockito.Mockito.when;
 
 import ec.com.nttdata.accounts_movements_service.client.CustomerClient;
 import ec.com.nttdata.accounts_movements_service.client.dto.CustomerDto;
+import ec.com.nttdata.accounts_movements_service.dto.report.PlainMovementReport;
 import ec.com.nttdata.accounts_movements_service.enums.AccountTypeEnum;
+import ec.com.nttdata.accounts_movements_service.enums.MovementTypeEnum;
 import ec.com.nttdata.accounts_movements_service.exception.CustomerNotFoundException;
 import ec.com.nttdata.accounts_movements_service.model.Account;
 import ec.com.nttdata.accounts_movements_service.model.Movement;
@@ -19,6 +21,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
@@ -173,6 +176,85 @@ class ReportServiceImplTest {
     @Test
     void validateDateRange_shouldPassWithValidRange() throws Exception {
         invokePrivateMethod("validateDateRange", new Class[] {LocalDate.class, LocalDate.class}, startDate, endDate);
+    }
+
+    @Test
+    void generatePlainReport_withValidCustomerId_shouldReturnAggregatedReport() {
+        Movement m1 = new Movement();
+        m1.setAmount(BigDecimal.valueOf(100));
+        m1.setMovementType(MovementTypeEnum.DEPOSIT);
+        m1.setDate(startDate.atStartOfDay());
+
+        Movement m2 = new Movement();
+        m2.setAmount(BigDecimal.valueOf(50));
+        m2.setMovementType(MovementTypeEnum.WITHDRAWAL);
+        m2.setDate(startDate.atStartOfDay().plusDays(1));
+
+        account.setMovements(new HashSet<>(List.of(m1, m2)));
+
+        when(repository.findByCustomerIdAndStartDateAndEndDate(any(), eq(1L), any(), any()))
+                .thenReturn(new PageImpl<>(List.of(account)));
+        when(customerClient.show(1L)).thenReturn(customerDto);
+
+        Page<PlainMovementReport> result = reportService.generatePlainReport(pageable, 1L, startDate, endDate);
+
+        assertThat(result.getContent()).hasSize(1);
+        PlainMovementReport report = result.getContent().get(0);
+        assertThat(report.getCliente()).isEqualTo("John Doe");
+        assertThat(report.getMovimiento()).isEqualTo(BigDecimal.valueOf(100)); // último movimiento (retiro) con signo
+        assertThat(report.getSaldoDisponible()).isEqualTo(BigDecimal.valueOf(100)); // 100 - 50
+    }
+
+    @Test
+    void generatePlainReport_withNullCustomerId_shouldReturnAggregatedReport() {
+        Movement deposit = new Movement();
+        deposit.setAmount(BigDecimal.valueOf(200));
+        deposit.setMovementType(MovementTypeEnum.DEPOSIT);
+        deposit.setDate(startDate.atStartOfDay());
+
+        account.setMovements(Set.of(deposit));
+
+        when(repository.findByCustomerIdAndStartDateAndEndDate(any(), isNull(), any(), any()))
+                .thenReturn(new PageImpl<>(List.of(account)));
+        when(customerClient.showByIds(Set.of(1L))).thenReturn(Set.of(customerDto));
+
+        Page<PlainMovementReport> result = reportService.generatePlainReport(pageable, null, startDate, endDate);
+
+        assertThat(result.getContent()).hasSize(1);
+        PlainMovementReport report = result.getContent().get(0);
+        assertThat(report.getMovimiento()).isEqualTo(BigDecimal.valueOf(200));
+        assertThat(report.getSaldoDisponible()).isEqualTo(BigDecimal.valueOf(200));
+    }
+
+    @Test
+    void generatePlainReport_withNoCustomerDto_shouldSkipAccount() {
+        Movement deposit = new Movement();
+        deposit.setAmount(BigDecimal.valueOf(200));
+        deposit.setMovementType(MovementTypeEnum.DEPOSIT);
+        deposit.setDate(startDate.atStartOfDay());
+
+        account.setMovements(Set.of(deposit));
+
+        when(repository.findByCustomerIdAndStartDateAndEndDate(any(), isNull(), any(), any()))
+                .thenReturn(new PageImpl<>(List.of(account)));
+        when(customerClient.showByIds(Set.of(1L))).thenReturn(Set.of()); // sin dto
+
+        Page<PlainMovementReport> result = reportService.generatePlainReport(pageable, null, startDate, endDate);
+
+        assertThat(result.getContent()).isEmpty();
+    }
+
+    @Test
+    void generatePlainReport_withNoMovements_shouldSkipAccount() {
+        account.setMovements(Set.of()); // sin movimientos
+
+        when(repository.findByCustomerIdAndStartDateAndEndDate(any(), eq(1L), any(), any()))
+                .thenReturn(new PageImpl<>(List.of(account)));
+        when(customerClient.show(1L)).thenReturn(customerDto);
+
+        Page<PlainMovementReport> result = reportService.generatePlainReport(pageable, 1L, startDate, endDate);
+
+        assertThat(result.getContent()).isEmpty();
     }
 
     private Object invokePrivateMethod(String name, Class<?>[] params, Object... args) throws Exception {
