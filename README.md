@@ -72,4 +72,4 @@ Tener docker - docker compose instalador y ejecutar el comando
 
 1. **Clonar el repositorio:**
    ```bash
-   https://github.com/LeandriT/spring-softka.git
+   https://github.com/LeandriT/spring-nttdata.git
